@@ -3,6 +3,7 @@ import "./App.css";
 import AddData from "./Components/AddData/AddData";
 import ShowData from "./Components/ShowData/ShowData";
 import axios from "axios";
+import axiosURL from "./Components/Axios";
 
 const App = () => {
   const [editMode, setEditMode] = useState(false);
@@ -29,9 +30,7 @@ const App = () => {
   const usedHandler = async () => {
     setLoading(true);
     try {
-      let data = await axios.get(
-        "https://64649d75043c103502be02f0.mockapi.io/crudData"
-      );
+      let data = await axiosURL.get();
       setDataArray(data.data);
     } catch (error) {
       console.log(error);

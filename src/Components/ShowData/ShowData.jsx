@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ShowData.css";
 import { notification } from "antd";
-import axios from "axios";
+import axiosURL from "../Axios";
 
 const ShowData = (props) => {
   const [api, contextHolder] = notification.useNotification();
@@ -29,9 +29,7 @@ const ShowData = (props) => {
   const deleteItem = async (e) => {
     props.setLoading(true);
     try {
-      await axios.delete(
-        `https://64649d75043c103502be02f0.mockapi.io/crudData/${e.target.parentElement.id}`
-      );
+      await axiosURL.delete(`/${e.target.parentElement.id}`);
       props.usedHandler();
       openNotification("top", "داده با موفقیت حذف شد");
     } catch (error) {
@@ -43,9 +41,7 @@ const ShowData = (props) => {
   const getEditItemInfo = async (e) => {
     props.setEditMode(true);
     try {
-      const data = await axios.get(
-        `https://64649d75043c103502be02f0.mockapi.io/crudData/${e.target.parentElement.id}`
-      );
+      const data = await axiosURL.get(`/${e.target.parentElement.id}`);
 
       setApiData(data.data);
     } catch (error) {

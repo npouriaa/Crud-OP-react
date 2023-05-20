@@ -2,8 +2,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+
 import { notification } from "antd";
 import "./AddData.css";
+import axiosURL from "../Axios";
 
 const AddData = (props) => {
   //refs
@@ -82,15 +84,12 @@ const AddData = (props) => {
         imageInfo: files[0],
       };
       try {
-        await axios.post(
-          "https://64649d75043c103502be02f0.mockapi.io/crudData",
-          obj
-        );
+        await axios.post(axiosURL.defaults.baseURL , obj)
         props.usedHandler();
         openNotificationSuccess("top", "داده با موفقیت اضافه شد");
       } catch (error) {
         console.log(error);
-        openNotificationError('top' , `عملیات با خطا مواجع شذ ${error}`)
+        openNotificationError("top", `عملیات با خطا مواجع شذ ${error}`);
       }
       props.setLoading(false);
       setTitle("");
@@ -110,14 +109,11 @@ const AddData = (props) => {
         imageURL: files[0].preview,
         imageInfo: files[0],
       };
-      await axios.put(
-        `https://64649d75043c103502be02f0.mockapi.io/crudData/${props.id}`,
-        obj
-      );
+      await axiosURL.put(`/${props.id}`, obj);
       props.usedHandler();
       openNotificationSuccess("top", "داده با موفقیت ویرایش شد");
     } catch (error) {
-      openNotificationError('top' , `عملیات با خطا مواجع شد ${error}`)
+      openNotificationError("top", `عملیات با خطا مواجع شد ${error}`);
       console.log(error);
     }
     setTitle("");
