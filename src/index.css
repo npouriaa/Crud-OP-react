@@ -1,13 +1,23 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+
+@font-face {
+  font-family: "iransans";
+  src: url(./Fonts/IRANSansWeb.ttf);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "iransans";
+
+  box-sizing: border-box;
+  /* font-family: "Kanit", sans-serif; */
+}
+
+body {
+  height: 100vh;
+  background-color: #e7eff9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

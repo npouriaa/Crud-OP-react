@@ -1,0 +1,63 @@
+.showContent {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  padding: 15px;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+.dataCard {
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 250px;
+  height: 250px;
+  background-color: #E4EEFA;
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+.dataCard img {
+  height: 140px;
+  width: 140px;
+  object-fit: scale-down;
+}
+
+.dataCard .url {
+  width: 100%;
+  text-align: center;
+}
+
+
+.dataCard .opBtn{
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 80px;
+  margin-top: 5px;
+  height: 25px;
+  transition: all .2s;
+  color: #fff;
+}
+
+.dataCard .deleteBtn{
+  background-color: #d22727;
+}
+
+.dataCard .deleteBtn:hover{
+  background-color: #ad2727;
+}
+
+.dataCard .editBtn{
+  background-color: #ff7300;
+}
+
+.dataCard .editBtn:hover{
+  background-color: #d16309;
+}
