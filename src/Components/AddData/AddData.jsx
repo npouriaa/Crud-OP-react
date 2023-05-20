@@ -84,7 +84,7 @@ const AddData = (props) => {
         imageInfo: files[0],
       };
       try {
-        await axios.post(axiosURL.defaults.baseURL , obj)
+        await axios.post(axiosURL.defaults.baseURL, obj);
         props.usedHandler();
         openNotificationSuccess("top", "داده با موفقیت اضافه شد");
       } catch (error) {
@@ -103,12 +103,12 @@ const AddData = (props) => {
   const editItem = async (e) => {
     e.preventDefault();
     props.setLoading(true);
+    const obj = {
+      title: title,
+      imageURL: files[0].preview,
+      imageInfo: files[0],
+    };
     try {
-      const obj = {
-        title: title,
-        imageURL: files[0].preview,
-        imageInfo: files[0],
-      };
       await axiosURL.put(`/${props.id}`, obj);
       props.usedHandler();
       openNotificationSuccess("top", "داده با موفقیت ویرایش شد");

@@ -42,7 +42,6 @@ const ShowData = (props) => {
     props.setEditMode(true);
     try {
       const data = await axiosURL.get(`/${e.target.parentElement.id}`);
-
       setApiData(data.data);
     } catch (error) {
       console.log(error);
