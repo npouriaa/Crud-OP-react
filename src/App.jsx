@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import AddData from "./Components/AddData/AddData";
 import ShowData from "./Components/ShowData/ShowData";
-import axios from "axios";
 import axiosURL from "./Components/Axios";
+import { notification } from "antd";
 
 const App = () => {
   const [editMode, setEditMode] = useState(false);
@@ -14,8 +14,18 @@ const App = () => {
   const [count, setCount] = useState(0);
   const [dataArray, setDataArray] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
 
-  const fillInputEdit = (setTxt, setFiles, setInUse) => {
+  //this function show the success notification
+  const openNotification = (placement) => {
+    api.error({
+      message: `خطا`,
+      description: Text,
+      placement,
+    });
+  };
+
+  const fillInputEdit = async (setTxt, setFiles) => {
     const obj = [
       {
         accept: "image/*",
@@ -23,8 +33,13 @@ const App = () => {
         preview: imageURL,
       },
     ];
-    setFiles(obj);
-    setTxt(title);
+    try {
+      await setFiles(obj);
+      await setTxt(title);
+    } catch (error) {
+      // openNotification("top", `خطا ${error}`);
+      console.log(error);
+    }
   };
 
   const usedHandler = async () => {
@@ -33,14 +48,15 @@ const App = () => {
       let data = await axiosURL.get();
       setDataArray(data.data);
     } catch (error) {
+      openNotification("top", `بارگذاری داده ها با خطا مواجه شد ${error}`);
       console.log(error);
     }
     setLoading(false);
-    // setEditMode(false);
   };
 
   return (
     <div className="container">
+      {contextHolder}
       <AddData
         editMode={editMode}
         setLoading={setLoading}

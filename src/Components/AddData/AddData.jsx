@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
-
 import { notification } from "antd";
 import "./AddData.css";
 import axiosURL from "../Axios";
@@ -44,8 +43,8 @@ const AddData = (props) => {
           })
         )
       );
-      handleOnDrop(acceptedFiles);
       setInUse(true);
+      handleOnDrop(acceptedFiles);
     },
   });
 
@@ -78,6 +77,9 @@ const AddData = (props) => {
     }
     if (title !== "" && files[0].preview !== "") {
       props.setLoading(true);
+      const file = [...files];
+      file[0].preview = fileUrl;
+      setFiles(file);
       const obj = {
         title: title,
         imageURL: fileUrl,
@@ -103,12 +105,15 @@ const AddData = (props) => {
   const editItem = async (e) => {
     e.preventDefault();
     props.setLoading(true);
+    const file = [...files];
+    file[0].preview = fileUrl;
     const obj = {
       title: title,
       imageURL: files[0].preview,
       imageInfo: files[0],
     };
     try {
+      setFiles(file);
       await axiosURL.put(`/${props.id}`, obj);
       props.usedHandler();
       openNotificationSuccess("top", "داده با موفقیت ویرایش شد");
@@ -130,7 +135,7 @@ const AddData = (props) => {
 
   useEffect(() => {
     setInUse(true);
-    props.fillInputEdit(setTitle, setFiles, setInUse);
+    props.fillInputEdit(setTitle, setFiles);
   }, [props.count]);
 
   return (
