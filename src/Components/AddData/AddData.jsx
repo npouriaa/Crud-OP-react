@@ -102,7 +102,7 @@ const AddData = (props) => {
       }
       props.setLoading(false);
       setTitle("");
-      setFiles([]);
+      setFiles([{ preview: "" }]);
       setInUse(false);
       frmRef.current.reset();
     }
@@ -129,7 +129,7 @@ const AddData = (props) => {
       console.log(error);
     }
     setTitle("");
-    setFiles([]);
+    setFiles([{ preview: "" }]);
     setInUse(false);
     props.setLoading(false);
     props.setEditMode(false);
