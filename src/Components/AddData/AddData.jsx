@@ -14,7 +14,7 @@ const AddData = (props) => {
   //states
   const [api, contextHolder] = notification.useNotification();
   const [inUse, setInUse] = useState(false);
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([{ preview: "" }]);
   const [title, setTitle] = useState("");
   const [fileUrl, setFileUrl] = useState("");
 
@@ -66,16 +66,23 @@ const AddData = (props) => {
     });
   };
 
-  //this function post data to the given API
-  const postData = async (e) => {
-    e.preventDefault();
+  const validate = () => {
     if (title === "") {
       openNotificationError("top", "لطفا عنوان عکس را وارد کنید");
+      return false;
     }
     if (files[0].preview === "") {
       openNotificationError("top", "لطفا یک عکس انتخاب کنید");
     }
     if (title !== "" && files[0].preview !== "") {
+      return true;
+    }
+  };
+
+  //this function post data to the given API
+  const postData = async (e) => {
+    e.preventDefault();
+    if (validate()) {
       props.setLoading(true);
       const file = [...files];
       file[0].preview = fileUrl;

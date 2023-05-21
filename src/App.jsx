@@ -34,8 +34,8 @@ const App = () => {
       },
     ];
     try {
-      await setFiles(obj);
-      await setTxt(title);
+       setFiles(obj);
+       setTxt(title);
     } catch (error) {
       // openNotification("top", `خطا ${error}`);
       console.log(error);
