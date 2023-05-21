@@ -1,20 +1,13 @@
+//imports
 import React, { useEffect, useState } from "react";
 import "./ShowData.css";
 import { notification } from "antd";
 import axiosURL from "../Axios";
 
 const ShowData = (props) => {
+  //states
   const [api, contextHolder] = notification.useNotification();
   const [apiData, setApiData] = useState("");
-
-  useEffect(() => {
-    if (apiData !== "") {
-      props.setTitle(apiData.title);
-      props.setPath(apiData.imageInfo.path);
-      props.setImageURL(apiData.imageURL);
-      props.setCount(props.count + 1);
-    }
-  }, [apiData]);
 
   //this function show the success notification
   const openNotification = (placement, Text) => {
@@ -37,12 +30,12 @@ const ShowData = (props) => {
     }
     props.setLoading(true);
   };
-
+  
+  //this function get the selected object from API according to given ID
   const getEditItemInfo = async (e) => {
     props.setEditMode(true);
     try {
       const data = await axiosURL.get(`/${e.target.parentElement.id}`);
-      console.log(data.data)
       setApiData(data.data);
     } catch (error) {
       console.log(error);
@@ -51,6 +44,16 @@ const ShowData = (props) => {
     // deleteItem(e);
   };
 
+  //useeffecst
+  useEffect(() => {
+    if (apiData !== "") {
+      props.setTitle(apiData.title);
+      props.setPath(apiData.imageInfo.path);
+      props.setImageURL(apiData.imageURL);
+      props.setCount(props.count + 1);
+    }
+  }, [apiData]);
+  
   return (
     <div className="showContent">
       {contextHolder}

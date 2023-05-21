@@ -1,3 +1,4 @@
+//imports
 import React, { useState } from "react";
 import "./App.css";
 import AddData from "./Components/AddData/AddData";
@@ -6,6 +7,7 @@ import axiosURL from "./Components/Axios";
 import { notification } from "antd";
 
 const App = () => {
+  //states
   const [editMode, setEditMode] = useState(false);
   const [id, setId] = useState();
   const [title, setTitle] = useState("");
@@ -25,6 +27,7 @@ const App = () => {
     });
   };
 
+  //this function fill inputs to edit the object
   const fillInputEdit = async (setTxt, setFiles) => {
     const obj = [
       {
@@ -42,6 +45,7 @@ const App = () => {
     }
   };
 
+  //this function load and reload the data's from API with get request
   const usedHandler = async () => {
     setLoading(true);
     try {

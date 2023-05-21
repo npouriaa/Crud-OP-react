@@ -66,6 +66,7 @@ const AddData = (props) => {
     });
   };
 
+  //this fuction validate inputs 
   const validate = () => {
     if (title === "") {
       openNotificationError("top", "لطفا عنوان عکس را وارد کنید");
